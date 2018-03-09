@@ -154,7 +154,9 @@ class VM:
 
 if __name__ == '__main__':
     vm = VM()
-    vm.interpret([17, 8, 0, 8, 5, 1])
+    with open('test.bc', 'rb') as f:
+        code = f.read()
+    vm.interpret(code)
 
 
 def test_1():
