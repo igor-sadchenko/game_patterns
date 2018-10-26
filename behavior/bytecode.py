@@ -1,7 +1,9 @@
 # Задача: Обеспечить поведению гибкость данных, декодируемых 
 # в виде инструкций для виртуальной машины.
+
 from functools import wraps
 from enum import IntEnum
+
 
 class Entity:
     def __init__(self, health=10, wisdom=1, agility=1):
