@@ -1,6 +1,3 @@
-# TODO:
-# 1. Упростить архитектуhe World, так как каждый новый класс будет вносить свои изменения.
-
 HEAVY_TANK = 1
 MEDIUM_TANK = 2
 
@@ -14,10 +11,7 @@ class World:
         # Обновление каждой Entity
 
         for entity in self.ai_entities:
-            if entity.id_type == HEAVY_TANK:
-                entity.try_push()
-            elif entity.id_type == MEDIUM_TANK:
-                entity.move_round()
+            entity.update():
 
         # Физика и рендеринг
 
@@ -26,13 +20,16 @@ class Entity:
         self.x = 0
         self.y = 0
 
+    def update(self):
+        raise NotImplemented
+
 class HeavyTank(Entity):
     def __init__(self):
         super().__init__()
         self.id_type = HEAVY_TANK
         self.retreat = False
 
-    def try_push(self):
+    def update(self):
         if self.retreat:
             self.x -= 1
             if self.x == 0: 
@@ -49,7 +46,7 @@ class MediumTank(Entity):
         self.up = False
         self.left = False
 
-    def move_round(self):
+    def update(self):
         if self.up:
             self.y -= 1
             if self.y == 0: 
@@ -69,8 +66,8 @@ class MediumTank(Entity):
 
 if __name__ == '__main__':
     world = World()
-    world.ai_entities.append(MediumTank())
-    world.ai_entities.append(HeavyTank())
+    world.entities.append(MediumTank())
+    world.entities.append(HeavyTank())
 
     world.gameLoop()
     world.gameLoop()
