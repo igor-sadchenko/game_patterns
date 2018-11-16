@@ -2,6 +2,8 @@
 # 1. Необходимо упростить создание однотипных объектов. Необходимо избавиться от ввода начальных параметров.
 # 2* Добавить к танкам WheeledVehicle с характеристиками hp=40, speed=80
 
+import time
+
 
 class TankExample:
 
@@ -10,12 +12,24 @@ class TankExample:
         self.speed = speed
 
 
+def getTankByKey(strKey):
+    if strKey == 'LightTank':
+        time.sleep(20)
+        return TankExample(health=30, speed=60)
+    elif strKey == 'MediumTank':
+        time.sleep(20)
+        return TankExample(health=100, speed=40)
+    elif strKey == 'HeavyTank':
+        time.sleep(20)
+        return TankExample(health=400, speed=20)
+
+
 if __name__ == '__main__':
     allTanks = []
 
-    allTanks.append(TankExample(health=30, speed=60))   # LightTank
-    allTanks.append(TankExample(health=30, speed=60))
-    allTanks.append(TankExample(health=100, speed=40))  # MediumTank
-    allTanks.append(TankExample(health=100, speed=40))
-    allTanks.append(TankExample(health=400, speed=20))  # HeavyTank
-    allTanks.append(TankExample(health=400, speed=20))
+    allTanks.append(getTankByKey('LightTank'))
+    allTanks.append(getTankByKey('LightTank'))
+    allTanks.append(getTankByKey('MediumTank'))
+    allTanks.append(getTankByKey('MediumTank'))
+    allTanks.append(getTankByKey('HeavyTank'))
+    allTanks.append(getTankByKey('HeavyTank'))
