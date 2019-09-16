@@ -1,30 +1,31 @@
 # TODO:
-# 1. Упростить архитектуhe World, так как каждый новый класс будет вносить свои изменения.
+# 1 Упростить архитектуру World таким образом, чтобы gameLoop
+# не изменялся при расширении классифирации танков.
+# 2* Упростить архитектуру так, чтобы класс World не изменялся
+# при добавлении новых механик.
 
 HEAVY_TANK = 1
 MEDIUM_TANK = 2
 
+
 class World:
     def __init__(self):
-        self.ai_entities = []
+        self.npc_tanks = []
 
     def gameLoop(self):
-        # Обработка ввода
-
-        # Обновление каждой Entity
-
-        for entity in self.ai_entities:
+        # Обновление каждого типа танка
+        for entity in self.npc_tanks:
             if entity.id_type == HEAVY_TANK:
                 entity.try_push()
             elif entity.id_type == MEDIUM_TANK:
                 entity.move_round()
 
-        # Физика и рендеринг
 
 class Entity:
     def __init__(self):
         self.x = 0
         self.y = 0
+
 
 class HeavyTank(Entity):
     def __init__(self):
@@ -41,6 +42,7 @@ class HeavyTank(Entity):
             self.x += 1
             if self.x == 100:
                 self.patrol_left = True
+
 
 class MediumTank(Entity):
     def __init__(self):
@@ -67,10 +69,11 @@ class MediumTank(Entity):
             if self.x == 100:
                 self.left = True
 
+
 if __name__ == '__main__':
     world = World()
-    world.ai_entities.append(MediumTank())
-    world.ai_entities.append(HeavyTank())
+    world.npc_tanks.append(MediumTank())
+    world.npc_tanks.append(HeavyTank())
 
     world.gameLoop()
     world.gameLoop()
